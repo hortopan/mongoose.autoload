@@ -11,12 +11,11 @@
     "url": "git://github.com/hortopan/mongoose.autoload.git"
   },
   "keywords": [
-    "mongoose",
+    "mongoose models autoload",
     "autoload",
     "models",
     "mongoose",
-    "autoload",
-    "models"
+    "schema autoload"
   ],
   "author": "Alex Hortopan <alex@hortopan.com> (https://github.com/hortopan)",
   "license": "MIT",

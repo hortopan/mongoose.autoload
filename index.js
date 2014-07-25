@@ -1,11 +1,10 @@
 module.exports = function(mongoose, loadPath,recursive){
 	
-	var mongoose = require('mongoose');
 	var fs = require('fs');
 	var path = require('path');
 	
 	if (!mongoose){
-		throw new error('mongoose object required');
+		mongoose = require('mongoose');
 	}
 
 	mongoose.models = {}
@@ -13,7 +12,7 @@ module.exports = function(mongoose, loadPath,recursive){
 	if (!loadPath){
 		loadPath  = './models';
 	} 
-	
+
 	var walk = function(dir) {
 		var results = []
 		var list = fs.readdirSync(dir)
@@ -41,14 +40,14 @@ module.exports = function(mongoose, loadPath,recursive){
 		if (!recursive){
 			file = path.resolve(loadPath , files[i]);
 		} else {
-			file = files[i];
+			file = path.resolve(files[i]);
 		}
 
 		if (fs.statSync(file).isFile()){
 
 			var name = path.basename(file);
 			name = name.replace('.js','');
-			mongoose.models[name] = require('mongoose').model(name, require(file)(require('mongoose')));
+			mongoose.models[name] = mongoose.model(name, require(file)(mongoose));
 
 		}
 
