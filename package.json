@@ -1,6 +1,6 @@
 {
   "name": "mongoose.models.autoload",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Autoload mongoose models/schemas",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "schema autoload"
   ],
   "author": "Alex Hortopan <alex@hortopan.com> (https://github.com/hortopan)",
-  "license": "MIT",
+  "license": "BSD",
   "licenses": [
     {
       "type": "MIT",
@@ -34,5 +34,8 @@
   },
   "dependencies": {
     "mongoose": "~3.8.13"
+  },
+  "directories": {
+    "test": "test"
   }
 }

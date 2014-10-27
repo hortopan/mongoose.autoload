@@ -13,7 +13,9 @@ npm install mongoose.models.autoload --save
 ## Usage
 
 ```javascript
-require('mongoose.models.autoload')($mongoose = require('mongoose'), $path = './models', $recursive = false).connect('mongodb://user:pass@host/db');
+require('mongoose.models.autoload')(require('mongoose'), require('path').join(__dirname, 'models'), true).connect('mongodb://user:pass@host/db');
+
+//Make sure you pass mongoose to first parameter, your models path to second, boolean recursive or not 3rd param.
 ```
 
 Put your models within the **./models** directory and add models in individual files:
@@ -39,4 +41,5 @@ Feel free to create your own hierarchy of files or directories!
 
 ## Release History
 
+* 0.1.1 Fixed readme.md
 * 0.1.0 Initial release
