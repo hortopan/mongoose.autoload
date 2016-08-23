@@ -1,6 +1,6 @@
 {
   "name": "mongoose.models.autoload",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Autoload mongoose models/schemas",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "schema autoload"
   ],
   "author": "Alex Hortopan <alex@hortopan.com> (https://github.com/hortopan)",
-  "license": "BSD",
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT",
@@ -29,13 +29,14 @@
     "url": "https://github.com/hortopan/mongoose.autoload/issues"
   },
   "devDependencies": {
-    "chai": "~1.9.1",
-    "mocha": "~1.21.0"
+    "chai": "~3.5.0",
+    "mocha": "~3.0.2"
   },
   "dependencies": {
-    "mongoose": "~3.8.13"
+    "mongoose": "~4.5.9"
   },
   "directories": {
     "test": "test"
-  }
+  },
+  "homepage": "https://github.com/hortopan/mongoose.autoload#readme"
 }
