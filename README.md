@@ -15,16 +15,17 @@ npm install mongoose.models.autoload --save
 ```javascript
 
 //load models and connect
-var mongoose = require('mongoose.models.autoload')(require('mongoose').connect('mongodb://127.0.0.1/db'), require('path').join(__dirname, 'models'), true);
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://127.0.0.1/db');
+var db = require('mongoose.models.autoload')(mongoose, require('path').join(__dirname, 'models'), true);
 
 //use a model
-var item = mongoose.models.test({name: 'tzaca paca'});
+var item = db.models.test({name: 'tzaca paca'});
 item.save();
 
 //find
-mongoose.models.test.findOne({name: 'tzaca paca'}, function(err,item){
-
-});
+db.models.test.findOne({name: 'tzaca paca'});
 
 //Make sure you pass mongoose to first parameter, your models path to second, boolean recursive or not 3rd param.
 ```
@@ -52,6 +53,7 @@ Feel free to create your own hierarchy of files or directories!
 
 ## Release History
 
+* 0.1.3 Bump version and mongoose version
 * 0.1.2 Bump version and mongoose
 * 0.1.1 Fixed readme.md
 * 0.1.0 Initial release
