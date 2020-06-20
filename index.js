@@ -1,42 +1,35 @@
-module.exports = function(mongoose, loadPath,recursive){
-	
-	var fs = require('fs');
-	var path = require('path');
-	
-	if (!mongoose){
-		mongoose = require('mongoose');
-	}
+const fs = require('fs');
+const path = require('path');
+const mongoose = require('mongoose');
 
-	mongoose.models = {}
+function walkDir(dir) {
+	let results = []
+	let list = fs.readdirSync(dir)
+	list.forEach(function(file) {
+		file = dir + '/' + file
+		let stat = fs.statSync(file)
+		if (stat && stat.isDirectory()) results = results.concat(walkDir(file))
+			else results.push(file)
+		})
+	return results;
+}
+
+module.exports = function(instance, loadPath = null, recursive = false){
+
+	instance.models = {};
 	
-	if (!loadPath){
-		loadPath  = './models';
-	} 
+	if (!loadPath) loadPath  = './models';
 
-	var walk = function(dir) {
-		var results = []
-		var list = fs.readdirSync(dir)
-		list.forEach(function(file) {
-			file = dir + '/' + file
-			var stat = fs.statSync(file)
-			if (stat && stat.isDirectory()) results = results.concat(walk(file))
-				else results.push(file)
-			})
-		return results;
-	}
-
-	var files = [];
+	let files = [];
 	if (!recursive){
 		files = fs.readdirSync(loadPath);
 	} else {
-		files = walk(loadPath);
+		files = walkDir(loadPath);
 	}
 	
-	var models = {}
+	for (let i in files){
 
-	for (var i in files){
-
-		var file = '';
+		let file = '';
 		if (!recursive){
 			file = path.resolve(loadPath , files[i]);
 		} else {
@@ -45,13 +38,13 @@ module.exports = function(mongoose, loadPath,recursive){
 
 		if (fs.statSync(file).isFile()){
 
-			var name = path.basename(file);
+			let name = path.basename(file);
 			name = name.replace('.js','');
-			mongoose.models[name] = mongoose.model(name, require(file)(mongoose));
+			instance.models[name] = mongoose.model(name, require(file)(mongoose));
 
 		}
 
 	}
 
-	return mongoose;
+	return instance;
 }

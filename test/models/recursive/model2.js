@@ -1,14 +1,12 @@
 module.exports = function(mongoose){
 
-        var schema = new mongoose.Schema({
+	let schema = new mongoose.Schema({
+		name: String,
+	});
 
-                name: String,
+	schema.methods.test = function(){
+		return 'model2';
+	}
 
-        });
-
-        schema.methods.test = function(){
-                return 'model2';
-        }
-
-        return schema;
+	return schema;
 }
