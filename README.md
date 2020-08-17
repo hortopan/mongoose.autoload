@@ -14,18 +14,23 @@ npm install mongoose.models.autoload --save
 
 ```javascript
 
-//load models and connect
-let connection = require('mongoose').connect('mongodb://127.0.0.1/db', { useNewUrlParser: true });
-const db = require('mongoose.models.autoload')(connection, require('path').join(__dirname, 'models'), true);
+const run = async function(){
 
-//use a model
-let item = db.models.test({name: 'tzaca paca'});
-item.save();
+	//connect mongoose to database
+	const connection = await require('mongoose').connect('mongodb://127.0.0.1/db', { useNewUrlParser: true });
 
-//find
-db.models.test.findOne({name: 'tzaca paca'});
+	//load models to mongoose connected instance
+	const db = require('mongoose.models.autoload')(connection, require('path').join(__dirname, 'models'), true);
 
-//Make sure you pass mongoose to first parameter, your models path to second, boolean recursive or not 3rd param.
+	//create
+	let item = db.models.test({name: 'tzaca paca'});
+	await item.save();
+
+	//find
+	let itemFound = await db.models.test.findOne({name: 'tzaca paca'});
+}
+
+run();
 ```
 
 Put your models within the **./models** directory and add models in individual files:
@@ -38,7 +43,7 @@ module.exports = function(mongoose){
 	});
 
 	schema.methods.test = function(){
-		return 'model1';
+		return 'hello world';
 	}
 
 	return schema;
@@ -51,6 +56,7 @@ Feel free to create your own hierarchy of files or directories!
 
 ## Release History
 
+* 0.3.0 Fix compatibility with Mongoose v5.10.0 (await for connection before loading models)
 * 0.2.0 Fix compatibility with Mongoose v5.9.19 
 * 0.1.3 Bump version and Mongoose version
 * 0.1.2 Bump version and Mongoose

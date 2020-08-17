@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const mongoose = require('mongoose');
 
 function walkDir(dir) {
 	let results = []
@@ -16,7 +15,7 @@ function walkDir(dir) {
 
 module.exports = function(instance, loadPath = null, recursive = false){
 
-	instance.models = {};
+	instance.models = {}
 	
 	if (!loadPath) loadPath  = './models';
 
@@ -40,8 +39,7 @@ module.exports = function(instance, loadPath = null, recursive = false){
 
 			let name = path.basename(file);
 			name = name.replace('.js','');
-			instance.models[name] = mongoose.model(name, require(file)(mongoose));
-
+			instance.models[name] = instance.model(name, require(file)(instance));
 		}
 
 	}
