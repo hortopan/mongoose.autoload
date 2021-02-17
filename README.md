@@ -56,6 +56,7 @@ Feel free to create your own hierarchy of files or directories!
 
 ## Release History
 
+* 0.3.1 Dependencies update
 * 0.3.0 Fix compatibility with Mongoose v5.10.0 (await for connection before loading models)
 * 0.2.0 Fix compatibility with Mongoose v5.9.19 
 * 0.1.3 Bump version and Mongoose version
